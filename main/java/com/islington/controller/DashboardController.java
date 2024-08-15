@@ -17,6 +17,7 @@ import com.islington.service.DashboardService;
  * This servlet manages interactions with the DashboardService to fetch student
  * information, handle updates, and manage student data. It forwards requests to
  * appropriate JSP pages or handles POST actions based on the request parameters.
+ * @author Prithivi
  */
 @WebServlet(asyncSupported = true, urlPatterns = { "/dashboard" })
 public class DashboardController extends HttpServlet {
