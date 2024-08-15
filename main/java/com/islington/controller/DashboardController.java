@@ -7,59 +7,169 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import com.islington.model.ProgramModel;
+import com.islington.model.StudentModel;
 import com.islington.service.DashboardService;
 
 /**
- * Servlet implementation class DashboardController
+ * Servlet implementation for handling dashboard-related HTTP requests.
  * 
- * This servlet handles HTTP requests for the dashboard page of the application.
- * It interacts with the DashboardService to retrieve data about students and forwards
- * the request to the appropriate JSP page for rendering.
+ * This servlet manages interactions with the DashboardService to fetch student
+ * information, handle updates, and manage student data. It forwards requests to
+ * appropriate JSP pages or handles POST actions based on the request parameters.
  */
-@WebServlet(asyncSupported = true, urlPatterns = {"/dashboard"})
+@WebServlet(asyncSupported = true, urlPatterns = { "/dashboard" })
 public class DashboardController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Instance of DashboardService to handle business logic related to dashboards
+    // Instance of DashboardService for handling business logic
     private DashboardService dashboardService;
 
     /**
-     * Default constructor that initializes the DashboardService instance.
+     * Default constructor initializes the DashboardService instance.
      */
     public DashboardController() {
         this.dashboardService = new DashboardService();
     }
 
     /**
-     * Handles HTTP GET requests by retrieving student information from the DashboardService
-     * and forwarding the request to the dashboard JSP page.
+     * Handles HTTP GET requests by retrieving student information and forwarding
+     * the request to the dashboard JSP page.
      * 
-     * @param request The HttpServletRequest object containing the request data.
+     * @param request  The HttpServletRequest object containing the request data.
      * @param response The HttpServletResponse object used to return the response.
      * @throws ServletException If an error occurs during request processing.
-     * @throws IOException If an input or output error occurs.
+     * @throws IOException      If an input or output error occurs.
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         // Retrieve all student information from the DashboardService
         request.setAttribute("studentList", dashboardService.getAllStudentsInfo());
 
         // Forward the request to the dashboard JSP for rendering
-        request.getRequestDispatcher("/WEB-INF/pages/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/pages/admin/dashboard.jsp").forward(request, response);
     }
 
     /**
-     * Handles HTTP POST requests. Currently, this method is not implemented and
-     * simply calls the superclass method.
+     * Handles HTTP POST requests for various actions such as update, delete, or 
+     * redirecting to the update form. Processes the request parameters based on 
+     * the specified action.
      * 
-     * @param req The HttpServletRequest object containing the request data.
-     * @param resp The HttpServletResponse object used to return the response.
+     * @param request  The HttpServletRequest object containing the request data.
+     * @param response The HttpServletResponse object used to return the response.
      * @throws ServletException If an error occurs during request processing.
-     * @throws IOException If an input or output error occurs.
+     * @throws IOException      If an input or output error occurs.
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO: Implement POST request handling logic
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        int studentId = Integer.parseInt(request.getParameter("studentId"));
+
+        switch (action) {
+            case "updateForm":
+                handleUpdateForm(request, response, studentId);
+                break;
+
+            case "update":
+                handleUpdate(request, response, studentId);
+                break;
+
+            case "delete":
+                handleDelete(request, response, studentId);
+                break;
+
+            default:
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Unknown action: " + action);
+        }
+    }
+
+    /**
+     * Handles the update form action by setting student data in the session and
+     * redirecting to the update page.
+     * 
+     * @param request  The HttpServletRequest object containing the request data.
+     * @param response The HttpServletResponse object used to return the response.
+     * @param studentId The ID of the student to be updated.
+     * @throws IOException If an input or output error occurs.
+     */
+    private void handleUpdateForm(HttpServletRequest request, HttpServletResponse response, int studentId)
+            throws IOException {
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        int programId = Integer.parseInt(request.getParameter("programId"));
+        String email = request.getParameter("email");
+        String number = request.getParameter("number");
+
+        ProgramModel program = new ProgramModel();
+        program.setProgramId(programId);
+        program.setName(dashboardService.getProgramName(programId));
+
+        StudentModel student = new StudentModel(studentId, firstName, lastName, program, email, number);
+
+        // Store the student object in the session
+        request.getSession().setAttribute("student", student);
+
+        // Redirect to the update URL
+        response.sendRedirect(request.getContextPath() + "/update");
+    }
+
+    /**
+     * Handles the update action by processing student data and updating it through
+     * the DashboardService. Redirects to the dashboard page upon completion.
+     * 
+     * @param request  The HttpServletRequest object containing the request data.
+     * @param response The HttpServletResponse object used to return the response.
+     * @param studentId The ID of the student to be updated.
+     * @throws ServletException If an error occurs during request processing.
+     * @throws IOException      If an input or output error occurs.
+     */
+    private void handleUpdate(HttpServletRequest request, HttpServletResponse response, int studentId)
+            throws ServletException, IOException {
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        int programId = Integer.parseInt(request.getParameter("programId"));
+        String email = request.getParameter("email");
+        String number = request.getParameter("number");
+
+        ProgramModel program = new ProgramModel();
+        program.setProgramId(programId);
+
+        StudentModel student = new StudentModel(studentId, firstName, lastName, program, email, number);
+        boolean success = dashboardService.updateStudent(student);
+
+        if (success) {
+            System.out.println("Update successful");
+        } else {
+            System.out.println("Update failed");
+        }
+
+        // Forward to the dashboard to reflect changes
+        doGet(request, response);
+    }
+
+    /**
+     * Handles the delete action by removing a student from the database and
+     * forwarding to the dashboard page.
+     * 
+     * @param request  The HttpServletRequest object containing the request data.
+     * @param response The HttpServletResponse object used to return the response.
+     * @param studentId The ID of the student to be deleted.
+     * @throws ServletException If an error occurs during request processing.
+     * @throws IOException      If an input or output error occurs.
+     */
+    private void handleDelete(HttpServletRequest request, HttpServletResponse response, int studentId)
+            throws ServletException, IOException {
+        boolean success = dashboardService.deleteStudent(studentId);
+
+        if (success) {
+            System.out.println("Deletion successful");
+        } else {
+            System.out.println("Deletion failed");
+        }
+
+        // Forward to the dashboard to reflect changes
+        doGet(request, response);
     }
 }

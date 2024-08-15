@@ -53,10 +53,8 @@ public class StudentModel {
 		this.program = program;
 		this.imageUrl = imageUrl;
 	}
-	
-	
-	public StudentModel(int id, String firstName, String lastName, 
-			ProgramModel program, String email, String number) {
+
+	public StudentModel(int id, String firstName, String lastName, ProgramModel program, String email, String number) {
 		super();
 		this.id = id;
 		this.firstName = firstName;

@@ -1,6 +1,8 @@
 package com.islington.model;
 
 public class ProgramModel {
+
+	private int programId;
 	private String name;
 	private String type;
 	private String category;
@@ -14,9 +16,17 @@ public class ProgramModel {
 		this.type = type;
 		this.category = category;
 	}
-	
+
 	public ProgramModel(String name) {
 		this.name = name;
+	}
+
+	public int getProgramId() {
+		return programId;
+	}
+
+	public void setProgramId(int programId) {
+		this.programId = programId;
 	}
 
 	public String getName() {
