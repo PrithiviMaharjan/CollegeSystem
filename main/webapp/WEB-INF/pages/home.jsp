@@ -1,36 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Home</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/header.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/home.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/footer.css" />
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/header.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/footer.css" />
 </head>
 <body>
-	<jsp:include page="header.jsp" />
+    <jsp:include page="header.jsp" />
 
-	<%
-	String errorMessage = (String) request.getAttribute("error");
-	String successMessage = (String) request.getAttribute("success");
+    <!-- Display error message if available -->
+    <c:if test="${not empty error}">
+        <p class="error-message">${error}</p>
+    </c:if>
 
-	if (errorMessage != null && !errorMessage.isEmpty()) {
-		out.println("<p class=\"error-message\">" + errorMessage + "</p>");
-	}
+    <!-- Display success message if available -->
+    <c:if test="${not empty success}">
+        <p class="success-message">${success}</p>
+    </c:if>
 
-	if (successMessage != null && !successMessage.isEmpty()) {
-	%>
-	<p class="success-message"><%=successMessage%></p>
-	<%
-	}
-	%>
-	<div class="main-body">This is our Home Page</div>
+    <div class="main-body">This is our Home Page</div>
 
-	<jsp:include page="footer.jsp" />
+    <jsp:include page="footer.jsp" />
 </body>
 </html>
