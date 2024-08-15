@@ -1,0 +1,161 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f0f2f5;
+	color: #344767;
+}
+
+.container {
+	display: flex;
+	min-height: 100vh;
+}
+
+.sidebar {
+	width: 250px;
+	background-color: #ffffff;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.sidebar .nav {
+	list-style-type: none;
+}
+
+.sidebar .nav li {
+	margin-bottom: 15px;
+}
+
+.sidebar .nav li a {
+	text-decoration: none;
+	color: #344767;
+	display: flex;
+	align-items: center;
+}
+
+.sidebar .nav li a .icon {
+	margin-right: 10px;
+	background-color: #f4f5f7;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.upgrade {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #f4f5f7;
+	text-align: center;
+	border-radius: 8px;
+	cursor: pointer;
+	color: #344767;
+	font-weight: bold;
+}
+
+.content {
+	flex: 1;
+	padding: 20px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.header .info-box {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 10px;
+	width: 22%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header .info-box h3 {
+	font-size: 1.5rem;
+	color: #344767;
+}
+
+.header .info-box p {
+	font-size: 1rem;
+	color: #00c9a7;
+}
+
+.card {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.card img {
+	width: 100px;
+	height: 100px;
+}
+
+.table-container {
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+table th, table td {
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+table th {
+	background-color: #f4f5f7;
+	color: #344767;
+}
+
+table tr:hover {
+	background-color: #f9f9f9;
+}
+
+@media ( max-width : 768px) {
+	.header {
+		flex-direction: column;
+	}
+	.header .info-box {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	.card {
+		flex-direction: column;
+	}
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.action-btn img {
+  width: 20px;
+  height: 20px;
+}
