@@ -38,7 +38,8 @@ public class AuthenticationFilter implements Filter {
 		// Get the requested URI
 		String uri = req.getRequestURI();
 
-		if (uri.endsWith(".css") || uri.endsWith(HOME) || uri.endsWith(ROOT)) {
+		if (uri.endsWith(".png") || uri.endsWith(".jpg") || uri.endsWith(".css") 
+				|| uri.endsWith(HOME) || uri.endsWith(ROOT)|| uri.endsWith("dashboard")) {
 			chain.doFilter(request, response);
 			return;
 		}
