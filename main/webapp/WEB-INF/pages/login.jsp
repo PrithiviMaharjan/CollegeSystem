@@ -11,7 +11,21 @@
 <body>
 	<div class="login-box">
 		<h2>Login</h2>
-		<form action="#">
+		<%
+		String errorMessage = (String) request.getAttribute("error");
+		String successMessage = (String) request.getAttribute("success");
+
+		if (errorMessage != null && !errorMessage.isEmpty()) {
+			out.println("<p class=\"error-message\">" + errorMessage + "</p>");
+		}
+
+		if (successMessage != null && !successMessage.isEmpty()) {
+		%>
+		<p class="success-message"><%=successMessage%></p>
+		<%
+		}
+		%>
+		<form action="${pageContext.request.contextPath}/login" method="post">
 			<div class="row">
 				<div class="col">
 					<label for="username">Username:</label> <input type="text"
