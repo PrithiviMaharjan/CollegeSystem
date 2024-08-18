@@ -1,13 +1,13 @@
-package com.islington.service;
+package com.college.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.islington.config.DbConfig;
-import com.islington.model.StudentModel;
-import com.islington.util.PasswordUtil;
+import com.college.config.DbConfig;
+import com.college.model.StudentModel;
+import com.college.util.PasswordUtil;
 
 /**
  * Service class for handling login operations. Connects to the database,

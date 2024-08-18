@@ -1,4 +1,4 @@
-package com.islington.util;
+package com.college.util;
 
 import java.io.File;
 import java.io.IOException;

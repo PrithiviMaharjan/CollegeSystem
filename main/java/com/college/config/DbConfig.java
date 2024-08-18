@@ -1,4 +1,4 @@
-package com.islington.config;
+package com.college.config;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

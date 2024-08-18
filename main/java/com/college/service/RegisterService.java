@@ -1,4 +1,4 @@
-package com.islington.service;
+package com.college.service;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -6,8 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.islington.config.DbConfig;
-import com.islington.model.StudentModel;
+import com.college.config.DbConfig;
+import com.college.model.StudentModel;
 
 /**
  * RegisterService handles the registration of new students. It manages database

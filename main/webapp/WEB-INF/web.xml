@@ -6,4 +6,14 @@
     <url-pattern>/css/*</url-pattern>
     <url-pattern>/resources/*</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StudentController</display-name>
+    <servlet-name>StudentController</servlet-name>
+    <servlet-class>com.college.controller.admin.StudentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentController</servlet-name>
+    <url-pattern>/StudentController</url-pattern>
+  </servlet-mapping>
 </web-app>

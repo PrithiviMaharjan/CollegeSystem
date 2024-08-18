@@ -1,4 +1,4 @@
-package com.islington.model;
+package com.college.model;
 
 public class ProgramModel {
 

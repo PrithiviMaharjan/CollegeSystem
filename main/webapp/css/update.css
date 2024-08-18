@@ -62,6 +62,22 @@ h2 {
 	text-align: center;
 }
 
+.row {
+	display: flex;
+	flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+	margin-bottom: 10px;
+}
+
+.col {
+	flex: 1;
+	margin-right: 20px;
+	text-align: left; /* Aligns text in columns to the left */
+}
+
+.col:last-child {
+	margin-right: 0;
+}
+
 /* Form Styles */
 form {
 	padding: 20px;

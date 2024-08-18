@@ -1,4 +1,4 @@
-package com.islington.util;
+package com.college.util;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;

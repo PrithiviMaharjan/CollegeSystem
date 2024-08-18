@@ -1,4 +1,4 @@
-package com.islington.util;
+package com.college.util;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

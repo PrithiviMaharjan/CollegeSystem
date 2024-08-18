@@ -1,11 +1,11 @@
-package com.islington.controller;
+package com.college.controller;
 
 import java.io.IOException;
 
-import com.islington.model.StudentModel;
-import com.islington.service.LoginService;
-import com.islington.util.CookieUtil;
-import com.islington.util.SessionUtil;
+import com.college.model.StudentModel;
+import com.college.service.LoginService;
+import com.college.util.CookieUtil;
+import com.college.util.SessionUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -62,8 +62,13 @@ public class LoginController extends HttpServlet {
 
 		if (loginStatus != null && loginStatus) {
 			SessionUtil.setAttribute(req, "username", username);
-			CookieUtil.addCookie(resp, "role", "student", 5 * 30);
-			resp.sendRedirect(req.getContextPath() + "/home"); // Redirect to /home
+			if (username.equals("admin")) {
+				CookieUtil.addCookie(resp, "role", "admin", 5 * 30);
+				resp.sendRedirect(req.getContextPath() + "/dashboard"); // Redirect to /home
+			} else {
+				CookieUtil.addCookie(resp, "role", "student", 5 * 30);
+				resp.sendRedirect(req.getContextPath() + "/home"); // Redirect to /home
+			}
 		} else {
 			handleLoginFailure(req, resp, loginStatus);
 		}

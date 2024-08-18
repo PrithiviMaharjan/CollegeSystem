@@ -53,30 +53,26 @@
 				</div>
 			</div>
 
-
-			<div class="card">
-				<div>
-					<h2>Welcome, Admins!</h2>
-					<p>School Management Dashboard</p>
-					<br /> <br />
-					<p>We're excited to have you onboard. Manage your school's data
-						efficiently and effortlessly with our user-friendly interface.
-						From student records to financial data, everything you need is
-						just a few clicks away.</p>
-				</div>
-				<img src="${contextPath}/resources/images/system/college.jpg"
-					alt="college">
-			</div>
-
 			<div class="table-container">
-				<h3>Recently Enrolled Student</h3>
+				<!-- Display error message if available -->
+				<c:if test="${not empty error}">
+					<p class="error-message">${error}</p>
+				</c:if>
+
+				<!-- Display success message if available -->
+				<c:if test="${not empty success}">
+					<p class="success-message">${success}</p>
+				</c:if>
+				<h3>Student List</h3>
 				<table>
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Name</th>
+							<th>Module</th>
 							<th>Email</th>
 							<th>Number</th>
+							<th>Actions</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -84,9 +80,24 @@
 						<c:forEach var="student" items="${studentList}">
 							<tr>
 								<td>${student.id}</td>
-								<td>${student.firstName}${student.lastName}</td>
+								<td>${student.firstName} ${student.lastName}</td>
+								<td>${student.program.name}</td>
 								<td>${student.email}</td>
 								<td>${student.number}</td>
+								<td>
+									<form action="${contextPath}/modifyStudents" method="post"
+										style="display: inline;">
+										<input type="hidden" name="studentId" value="${student.id}">
+										<input type="hidden" name="action" value="updateForm">
+										<button class="action-btn" type="submit">Edit</button>
+									</form>
+									<form action="${contextPath}/students" method="post"
+										style="display: inline;">
+										<input type="hidden" name="studentId" value="${student.id}">
+										<input type="hidden" name="action" value="delete">
+										<button class="action-btn" type="submit">Delete</button>
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

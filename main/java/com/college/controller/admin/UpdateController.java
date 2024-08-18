@@ -1,11 +1,11 @@
-package com.islington.controller;
+package com.college.controller.admin;
 
 import java.io.IOException;
 
-import com.islington.model.ProgramModel;
-import com.islington.model.StudentModel;
-import com.islington.service.UpdateService;
-import com.islington.util.SessionUtil;
+import com.college.model.ProgramModel;
+import com.college.model.StudentModel;
+import com.college.service.UpdateService;
+import com.college.util.SessionUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * It interacts with the UpdateService to perform database operations and 
  * forwards requests to the appropriate JSP page for user interaction.
  */
-@WebServlet(asyncSupported = true, urlPatterns = { "/update" })
+@WebServlet(asyncSupported = true, urlPatterns = { "/studentUpdate" })
 public class UpdateController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     
@@ -89,7 +89,7 @@ public class UpdateController extends HttpServlet {
         // Attempt to update student information in the database
         Boolean result = updateService.updateStudentInfo(student);
         if (result != null && result) {
-            resp.sendRedirect(req.getContextPath() + "/dashboard"); // Redirect to dashboard on success
+            resp.sendRedirect(req.getContextPath() + "/modifyStudents"); // Redirect to dashboard on success
         } else {
             req.getSession().setAttribute("student", student);
             handleUpdateFailure(req, resp, result); // Handle failure

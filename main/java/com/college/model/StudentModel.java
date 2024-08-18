@@ -1,4 +1,4 @@
-package com.islington.model;
+package com.college.model;
 
 import java.time.LocalDate;
 
@@ -60,6 +60,15 @@ public class StudentModel {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.program = program;
+		this.email = email;
+		this.number = number;
+	}
+	
+	public StudentModel(int id, String firstName, String lastName, String email, String number) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.number = number;
 	}

@@ -1,4 +1,4 @@
-package com.islington.controller;
+package com.college.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,8 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import com.islington.util.CookieUtil;
-import com.islington.util.SessionUtil;
+import com.college.util.CookieUtil;
+import com.college.util.SessionUtil;
 
 /**
  * Servlet implementation class LogoutController
