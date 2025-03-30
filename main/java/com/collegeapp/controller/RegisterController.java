@@ -8,7 +8,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(asyncSupported = true, urlPatterns = {"/register"})
+/**
+ * @author Prithivi Maharjan
+ */
+@WebServlet(asyncSupported = true, urlPatterns = { "/register" })
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -16,5 +19,5 @@ public class RegisterController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(req, resp);
 	}
-	
+
 }
