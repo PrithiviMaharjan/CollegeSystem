@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Login to your account</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/login.css" />
+	href="..//css/login.css" />
 </head>
 <body>
 	<div class="login-box">

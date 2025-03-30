@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>Home</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/header.css" />
+	href="../css/header.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/home.css" />
+	href="..//css/home.css" />
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/footer.css" />
+	href="..//css/footer.css" />
 </head>
 <body>
 	<jsp:include page="header.jsp" />
