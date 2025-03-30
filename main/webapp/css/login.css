@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+body {
+	font-family: sans-serif;
+	margin: 0;
+	padding: 20px;
+	background-image: linear-gradient(to right, pink, purple);
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-box {
+	width: 400px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	text-align: center; /* Center-aligns text and inline elements */
+}
+
+h2 {
+	margin-bottom: 20px;
+}
+
+.row {
+	display: flex;
+	justify-content: center; /* Centers columns horizontally */
+	margin-bottom: 10px;
+}
+
+.col {
+	flex: 1;
+	margin-right: 20px;
+}
+
+.col:last-child {
+	margin-right: 0;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	text-align: left; /* Aligns label text to the left */
+}
+
+input, select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+button, .login-button {
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	display: inline-block;
+	/* Ensures button/link behaves as an inline-block element */
+	text-align: center; /* Centers text inside button/link */
+	margin-top: 10px; /* Space above the button/link */
+	text-decoration: none; /* Removes underline from links */
+}
+
+button:hover, .login-button:hover {
+	background-color: #449A44;
+}
+
+.error-message {
+	color: red;
+}
+
+.success-message {
+	color: seagreen;
+}
+
+/* Additional styles for the register link to match the button */
+a {
+	color: #4CAF50;
+	text-decoration: none;
+	display: inline-block;
+	/* Ensures the link behaves like an inline-block element */
+	padding: 10px 20px;
+	border-radius: 5px;
+	margin-top: 10px; /* Space above the link */
+}
+
+a:hover {
+	background-color: #f0f0f0;
+	/* Optional: Background color on hover for better visual feedback */
+	color: #449A44;
+}
