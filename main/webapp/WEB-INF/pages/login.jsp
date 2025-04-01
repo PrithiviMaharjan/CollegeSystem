@@ -11,7 +11,7 @@
 <body>
     <div class="login-box">
         <h2>Login</h2>
-        <form action="#">
+        <form action="${pageContext.request.contextPath}/login" method="post">
             <div class="row">
                 <div class="col">
                     <label for="username">Username:</label>
