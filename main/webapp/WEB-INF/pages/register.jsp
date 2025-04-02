@@ -1,3 +1,5 @@
+<%@page import="com.collegeapp.model.ProgramModel"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,17 +32,17 @@
 			<div class="row">
 				<div class="col">
 					<label for="firstName">First Name:</label> <input type="text"
-						id="firstName" name="firstName" required>
+						id="firstName" name="firstName" value="Prithivi" required>
 				</div>
 				<div class="col">
 					<label for="lastName">Last Name:</label> <input type="text"
-						id="lastName" name="lastName" required>
+						id="lastName" name="lastName" value="Maharjan" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<label for="username">Username:</label> <input type="text"
-						id="username" name="username" required>
+						id="username" name="username" value="Prithivi@12" required>
 				</div>
 				<div class="col">
 					<label for="birthday">Date of Birth:</label> <input type="date"
@@ -57,31 +59,39 @@
 				</div>
 				<div class="col">
 					<label for="email">Email:</label> <input type="email" id="email"
-						name="email" required>
+						name="email" value="Prithivi@gmail.com" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<label for="phoneNumber">Phone Number:</label> <input type="tel"
-						id="phoneNumber" name="phoneNumber" required>
+						id="phoneNumber" name="phoneNumber" value="9878787656" required>
 				</div>
 				<div class="col">
 					<label for="subject">Subject:</label> <select id="subject"
 						name="subject" required>
-						<option value="computing">Computing</option>
-						<option value="multimedia">Multimedia</option>
-						<option value="networking">Networking</option>
+						<option value="">Select a program</option>
+						<%
+						List<ProgramModel> programs = (List<ProgramModel>) request.getAttribute("programs");
+						if (programs != null) {
+							for (ProgramModel program : programs) {
+						%>
+						<option value="<%=program.getId()%>"><%=program.getName()%></option>
+						<%
+						}
+						}
+						%>
 					</select>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<label for="password">Password:</label> <input type="password"
-						id="password" name="password" required>
+						id="password" name="password" value="Prithivi@12" required>
 				</div>
 				<div class="col">
 					<label for="retypePassword">Retype Password:</label> <input
-						type="password" id="retypePassword" name="retypePassword" required>
+						type="password" id="retypePassword" name="retypePassword" value="Prithivi@12" required>
 				</div>
 			</div>
 			<div class="row">

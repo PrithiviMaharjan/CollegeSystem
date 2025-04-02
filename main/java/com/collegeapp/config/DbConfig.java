@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class DbConfig {
 
 	// Database configuration information
-	private static final String DB_NAME = "islington";
+	private static final String DB_NAME = "college_app";
 	private static final String URL = "jdbc:mysql://localhost:3306/" + DB_NAME;
 	private static final String USERNAME = "root";
 	private static final String PASSWORD = "";

@@ -13,7 +13,7 @@ public class StudentModel {
 	private String email;
 	private String number;
 	private String password;
-	private ProgramModel program;
+	private int programId;
 	private String imageUrl;
 
 	public StudentModel() {
@@ -25,7 +25,7 @@ public class StudentModel {
 	}
 
 	public StudentModel(int id, String firstName, String lastName, String userName, LocalDate dob, String gender,
-			String email, String number, String password, ProgramModel program, String imageUrl) {
+			String email, String number, String password, int programId, String imageUrl) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -36,12 +36,12 @@ public class StudentModel {
 		this.email = email;
 		this.number = number;
 		this.password = password;
-		this.program = program;
+		this.programId = programId;
 		this.imageUrl = imageUrl;
 	}
 
 	public StudentModel(String firstName, String lastName, String userName, LocalDate dob, String gender, String email,
-			String number, String password, ProgramModel program, String imageUrl) {
+			String number, String password, int programId, String imageUrl) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
@@ -50,7 +50,7 @@ public class StudentModel {
 		this.email = email;
 		this.number = number;
 		this.password = password;
-		this.program = program;
+		this.programId = programId;
 		this.imageUrl = imageUrl;
 	}
 
@@ -126,12 +126,12 @@ public class StudentModel {
 		this.password = password;
 	}
 
-	public ProgramModel getProgram() {
-		return program;
+	public int getProgramId() {
+		return programId;
 	}
 
-	public void setProgram(ProgramModel program) {
-		this.program = program;
+	public void setProgramId(int programId) {
+		this.programId = programId;
 	}
 
 	public String getImageUrl() {

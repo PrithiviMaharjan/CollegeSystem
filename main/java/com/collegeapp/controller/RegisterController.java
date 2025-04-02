@@ -33,6 +33,7 @@ public class RegisterController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setAttribute("programs", registerService.getPrograms());
 		req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
 	}
 
@@ -67,7 +68,7 @@ public class RegisterController extends HttpServlet {
 		String gender = req.getParameter("gender");
 		String email = req.getParameter("email");
 		String number = req.getParameter("phoneNumber");
-		String subject = req.getParameter("subject");
+		int programId = Integer.parseInt(req.getParameter("subject"));
 
 		String password = req.getParameter("password");
 		String retypePassword = req.getParameter("retypePassword");
@@ -81,8 +82,7 @@ public class RegisterController extends HttpServlet {
 		Part image = req.getPart("image");
 		String imageUrl = imageUtil.getImageNameFromPart(image);
 
-		ProgramModel programModel = new ProgramModel(subject);
-		return new StudentModel(firstName, lastName, username, dob, gender, email, number, password, programModel,
+		return new StudentModel(firstName, lastName, username, dob, gender, email, number, password, programId,
 				imageUrl);
 	}
 

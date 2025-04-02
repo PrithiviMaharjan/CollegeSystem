@@ -5,8 +5,11 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.collegeapp.config.DbConfig;
+import com.collegeapp.model.ProgramModel;
 import com.collegeapp.model.StudentModel;
 
 /**
@@ -29,6 +32,36 @@ public class RegisterService {
 		}
 	}
 
+	public List<ProgramModel> getPrograms() {
+		if (dbConn == null) {
+			System.err.println("Database connection is not available.");
+			return null;
+		}
+
+		String query = "Select * from program";
+
+		try (PreparedStatement programStmt = dbConn.prepareStatement(query)) {
+			ResultSet result = programStmt.executeQuery();
+
+			List<ProgramModel> program = new ArrayList<ProgramModel>();
+
+			while (result.next()) {
+				program.add(new ProgramModel(
+						Integer.parseInt(result.getString("id")), 
+						result.getString("name"),
+						result.getString("type"), 
+						result.getString("category"))
+					);
+			}
+
+			return program;
+		} catch (SQLException e) {
+			System.err.println("Error during student registration: " + e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	/**
 	 * Registers a new student in the database.
 	 *
@@ -47,12 +80,6 @@ public class RegisterService {
 
 		try (PreparedStatement programStmt = dbConn.prepareStatement(programQuery);
 				PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery)) {
-
-			// Fetch program ID
-			programStmt.setString(1, studentModel.getProgram().getName());
-			ResultSet result = programStmt.executeQuery();
-			int programId = result.next() ? result.getInt("program_id") : 1;
-
 			// Insert student details
 			insertStmt.setString(1, studentModel.getFirstName());
 			insertStmt.setString(2, studentModel.getLastName());
@@ -62,7 +89,7 @@ public class RegisterService {
 			insertStmt.setString(6, studentModel.getEmail());
 			insertStmt.setString(7, studentModel.getNumber());
 			insertStmt.setString(8, studentModel.getPassword());
-			insertStmt.setInt(9, programId);
+			insertStmt.setInt(9, studentModel.getProgramId());
 			insertStmt.setString(10, studentModel.getImageUrl());
 
 			return insertStmt.executeUpdate() > 0;
