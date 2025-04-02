@@ -1,4 +1,4 @@
-package com.islington.model;
+package com.collegeapp.model;
 
 public class ProgramModel {
 	private String name;
@@ -14,7 +14,7 @@ public class ProgramModel {
 		this.type = type;
 		this.category = category;
 	}
-	
+
 	public ProgramModel(String name) {
 		this.name = name;
 	}

@@ -1,4 +1,4 @@
-package com.islington.model;
+package com.collegeapp.model;
 
 import java.time.LocalDate;
 
@@ -141,5 +141,4 @@ public class StudentModel {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-
 }

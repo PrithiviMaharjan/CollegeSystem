@@ -4,15 +4,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Registration Form</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/css/register.css" />
 </head>
 <body>
 	<div class="container">
-
 		<h1>Registration Form</h1>
-
 		<%
 		String errorMessage = (String) request.getAttribute("error");
 		String successMessage = (String) request.getAttribute("success");
@@ -27,8 +25,6 @@
 		<%
 		}
 		%>
-
-
 		<form action="${pageContext.request.contextPath}/register"
 			method="post" enctype="multipart/form-data">
 			<div class="row">

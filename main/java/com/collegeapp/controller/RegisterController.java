@@ -1,21 +1,21 @@
-package com.islington.controller;
+package com.collegeapp.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-import com.islington.model.ProgramModel;
-import com.islington.model.StudentModel;
-import com.islington.service.RegisterService;
-import com.islington.util.ImageUtil;
-import com.islington.util.PasswordUtil;
-
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
+
+import com.collegeapp.model.ProgramModel;
+import com.collegeapp.model.StudentModel;
+import com.collegeapp.service.RegisterService;
+import com.collegeapp.util.ImageUtil;
+import com.collegeapp.util.PasswordUtil;
 
 /**
  * RegisterController handles user registration requests and processes form
@@ -82,8 +82,7 @@ public class RegisterController extends HttpServlet {
 		String imageUrl = imageUtil.getImageNameFromPart(image);
 
 		ProgramModel programModel = new ProgramModel(subject);
-		return new StudentModel(firstName, lastName, username, dob,
-				gender, email, number, password, programModel,
+		return new StudentModel(firstName, lastName, username, dob, gender, email, number, password, programModel,
 				imageUrl);
 	}
 
