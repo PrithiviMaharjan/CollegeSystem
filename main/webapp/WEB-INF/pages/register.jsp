@@ -91,7 +91,8 @@
 				</div>
 				<div class="col">
 					<label for="retypePassword">Retype Password:</label> <input
-						type="password" id="retypePassword" name="retypePassword" value="Prithivi@12" required>
+						type="password" id="retypePassword" name="retypePassword"
+						value="Prithivi@12" required>
 				</div>
 			</div>
 			<div class="row">

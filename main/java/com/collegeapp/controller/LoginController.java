@@ -17,20 +17,18 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(asyncSupported = true, urlPatterns = { "/login" })
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final ValidationUtil validationUtil;
-	private final RedirectionUtil redirectionUtil;
-	private final String rootURL = "WEB-INF/pages";
-	private final String loginURL = rootURL+"/login";
-	private final String homeURL = rootURL+"/home";
-	
-	public LoginController(ValidationUtil validationUtil, RedirectionUtil redirectionUtil) {
-		this.validationUtil = validationUtil;
-		this.redirectionUtil = redirectionUtil;
+	private ValidationUtil validationUtil;
+	private RedirectionUtil redirectionUtil;
+
+	@Override
+	public void init() throws ServletException {
+		this.validationUtil = new ValidationUtil();
+		this.redirectionUtil = new RedirectionUtil();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher(loginURL).forward(req, resp);
+		req.getRequestDispatcher(RedirectionUtil.loginUrl).forward(req, resp);
 	}
 
 	@Override
@@ -39,12 +37,15 @@ public class LoginController extends HttpServlet {
 		String password = req.getParameter("password");
 
 		if (validationUtil.isNullOrEmpty("username") || validationUtil.isNullOrEmpty("password")) {
-			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please fill all the fields!", loginURL);
+			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please fill all the fields!",
+					RedirectionUtil.loginUrl);
 		} else {
 			if (username.equals("admin") && password.equals("admin")) {
-				redirectionUtil.setMsgAndRedirect(req, resp, "success", "Successfully Logged In!", homeURL);
+				redirectionUtil.setMsgAndRedirect(req, resp, "success", "Successfully Logged In!",
+						RedirectionUtil.homeUrl);
 			} else {
-				redirectionUtil.setMsgAndRedirect(req, resp, "error", "Either username or password is mistake!", loginURL);
+				redirectionUtil.setMsgAndRedirect(req, resp, "error", "Either username or password is mistake!",
+						RedirectionUtil.loginUrl);
 			}
 		}
 

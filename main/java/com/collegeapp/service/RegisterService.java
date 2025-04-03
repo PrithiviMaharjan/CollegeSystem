@@ -34,24 +34,21 @@ public class RegisterService {
 
 	public List<ProgramModel> getPrograms() {
 		if (dbConn == null) {
-			System.err.println("Database connection is not available.");
+			System.err.println("Database connection is not available!");
 			return null;
 		}
 
 		String query = "Select * from program";
 
-		try (PreparedStatement programStmt = dbConn.prepareStatement(query)) {
+		try {
+			PreparedStatement programStmt = dbConn.prepareStatement(query);
 			ResultSet result = programStmt.executeQuery();
 
 			List<ProgramModel> program = new ArrayList<ProgramModel>();
 
 			while (result.next()) {
-				program.add(new ProgramModel(
-						Integer.parseInt(result.getString("id")), 
-						result.getString("name"),
-						result.getString("type"), 
-						result.getString("category"))
-					);
+				program.add(new ProgramModel(result.getInt("id"), result.getString("name"), result.getString("type"),
+						result.getString("category")));
 			}
 
 			return program;
@@ -74,12 +71,11 @@ public class RegisterService {
 			return null;
 		}
 
-		String programQuery = "SELECT program_id FROM program WHERE name = ?";
 		String insertQuery = "INSERT INTO student (first_name, last_name, username, dob, gender, email, number, password, program_id, image_path) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		try (PreparedStatement programStmt = dbConn.prepareStatement(programQuery);
-				PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery)) {
+		try {
+			PreparedStatement insertStmt = dbConn.prepareStatement(insertQuery);
 			// Insert student details
 			insertStmt.setString(1, studentModel.getFirstName());
 			insertStmt.setString(2, studentModel.getLastName());
