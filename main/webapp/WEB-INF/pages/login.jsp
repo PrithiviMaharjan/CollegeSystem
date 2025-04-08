@@ -10,7 +10,6 @@
 </head>
 <body>
 	<div class="login-box">
-		<h2>Login</h2>
 		<%
 		String errorMessage = (String) request.getAttribute("error");
 		String successMessage = (String) request.getAttribute("success");
@@ -25,6 +24,8 @@
 		<%
 		}
 		%>
+
+		<h2>Login</h2>
 		<form action="${pageContext.request.contextPath}/login" method="post">
 			<div class="row">
 				<div class="col">
@@ -38,8 +39,21 @@
 						id="password" name="password" required>
 				</div>
 			</div>
-			<button type="submit" class="login-button">Login</button>
+			<div class="row">
+				<button type="submit" class="login-button">Login</button>
+			</div>
 		</form>
+
+		<!-- Forgot Password and Register Button in Separate Rows -->
+		<div class="row">
+			<a href="${pageContext.request.contextPath}/forgotpassword"
+				class="forgot-button">Forgot Password</a>
+		</div>
+
+		<div class="row">
+			<a href="${pageContext.request.contextPath}/register"
+				class="register-button">Create new account</a>
+		</div>
 	</div>
 </body>
 </html>
