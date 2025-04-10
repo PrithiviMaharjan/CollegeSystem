@@ -31,7 +31,6 @@ public class RegisterService {
 			ex.printStackTrace();
 		}
 	}
-	
 
 	public List<ProgramModel> getPrograms() {
 		if (dbConn == null) {

@@ -35,8 +35,8 @@ if (currentUser != null) {
 			<li><a href="${pageContext.request.contextPath}/about">About</a></li>
 			<li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
 			<li>
-				<form action="<%= actionUrl %>" method="<%= formMethod %>">
-					<input type="submit" value="<%= buttonLabel %>"/>
+				<form action="<%=actionUrl%>" method="<%=formMethod%>">
+					<input type="submit" value="<%=buttonLabel%>" />
 				</form>
 			</li>
 		</ul>
