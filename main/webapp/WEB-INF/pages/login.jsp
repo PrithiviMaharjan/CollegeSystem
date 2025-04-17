@@ -2,20 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Login to your account</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/login.css" />
+	href="${contextPath}/css/login.css" />
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/validation.css" />
 </head>
 <body>
 	<div class="login-box">
 		<jsp:include page="validation.jsp" />
 
 		<h2>Login</h2>
-		<form action="${pageContext.request.contextPath}/login" method="post">
+		<form action="${contextPath}/login" method="post">
 			<div class="row">
 				<div class="col">
 					<label for="username">Username:</label> <input type="text"
@@ -35,13 +39,13 @@
 
 		<!-- Forgot Password and Register Button in Separate Rows -->
 		<div class="row">
-			<a href="${pageContext.request.contextPath}/forgotpassword"
-				class="forgot-button">Forgot Password</a>
+			<a href="${contextPath}/forgotpassword" class="forgot-button">Forgot
+				Password</a>
 		</div>
 
 		<div class="row">
-			<a href="${pageContext.request.contextPath}/register"
-				class="register-button">Create new account</a>
+			<a href="${contextPath}/register" class="register-button">Create
+				new account</a>
 		</div>
 	</div>
 </body>

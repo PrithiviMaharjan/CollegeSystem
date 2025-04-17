@@ -3,42 +3,32 @@
 <%@ page import="jakarta.servlet.http.HttpSession"%>
 <%@ page import="jakarta.servlet.http.HttpServletRequest"%>
 
-<%
-// Initialize necessary objects and variables
-HttpSession userSession = request.getSession(false);
-String currentUser = (String) (userSession != null ? userSession.getAttribute("username") : null);
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-String contextPath = request.getContextPath();
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-String actionUrl;
-String formMethod;
-String buttonLabel;
-
-if (currentUser != null) {
-	actionUrl = contextPath + "/logout";
-	formMethod = "post";
-	buttonLabel = "Logout";
-} else {
-	actionUrl = contextPath + "/login";
-	formMethod = "get";
-	buttonLabel = "Login";
-}
-%>
 <div id="header">
 	<header class="header">
 		<h1 class="logo">
 			<a href=""><img
-				src="${pageContext.request.contextPath}/resources/images/system/logo.png" /></a>
+				src="${contextPath}/resources/images/system/logo.png" /></a>
 		</h1>
 		<ul class="main-nav">
-			<li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-			<li><a href="${pageContext.request.contextPath}/about">About</a></li>
-			<li><a href="${pageContext.request.contextPath}/contact">Contact</a></li>
-			<li>
-				<form action="<%=actionUrl%>" method="<%=formMethod%>">
-					<input type="submit" value="<%=buttonLabel%>" />
-				</form>
-			</li>
+			<li><a href="${contextPath}/home">Home</a></li>
+			<li><a href="${contextPath}/about">About</a></li>
+			<li><a href="${contextPath}/contact">Contact</a></li>
+			<li><c:choose>
+					<c:when test="${not empty sessionScope.username}">
+						<form action="${contextPath}/logout" method="post">
+							<input type="submit" value="Logout" />
+						</form>
+					</c:when>
+					<c:otherwise>
+						<form action="${contextPath}/login" method="get">
+							<input type="submit" value="Login" />
+						</form>
+					</c:otherwise>
+				</c:choose></li>
 		</ul>
 	</header>
 </div>

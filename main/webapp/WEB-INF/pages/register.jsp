@@ -3,8 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -12,15 +13,17 @@
 <meta charset="ISO-8859-1">
 <title>Registration Form</title>
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/register.css" />
+	href="${contextPath}/css/register.css" />
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/css/validation.css" />
 </head>
 <body>
 	<div class="container">
 		<h1>Registration Form</h1>
 		<jsp:include page="validation.jsp" />
-		
-		<form action="${pageContext.request.contextPath}/register"
-			method="post" enctype="multipart/form-data">
+
+		<form action="${contextPath}/register" method="post"
+			enctype="multipart/form-data">
 			<div class="row">
 				<div class="col">
 					<label for="firstName">First Name:</label> <input type="text"
