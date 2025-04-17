@@ -1,4 +1,8 @@
-package com.islington.filter;
+package com.collegeapp.filter;
+
+import java.io.IOException;
+
+import com.collegeapp.util.SessionUtil;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -10,11 +14,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
-
-import com.islington.util.SessionUtil;
-
-@WebFilter(asyncSupported = true, urlPatterns = "/*")
+@WebFilter(asyncSupported = true, urlPatterns = { "/*" })
 public class AuthenticationFilter implements Filter {
 
 	private static final String LOGIN = "/login";
@@ -24,13 +24,13 @@ public class AuthenticationFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// Initialization logic, if required
+		// TODO Auto-generated method stub
+		Filter.super.init(filterConfig);
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-
 		// Cast the request and response to HttpServletRequest and HttpServletResponse
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
@@ -63,6 +63,8 @@ public class AuthenticationFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		// Cleanup logic, if required
+		// TODO Auto-generated method stub
+		Filter.super.destroy();
 	}
+
 }

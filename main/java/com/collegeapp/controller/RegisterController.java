@@ -1,21 +1,21 @@
-package com.islington.controller;
+package com.collegeapp.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-import com.islington.model.ProgramModel;
-import com.islington.model.StudentModel;
-import com.islington.service.RegisterService;
-import com.islington.util.ImageUtil;
-import com.islington.util.PasswordUtil;
-
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
+
+import com.collegeapp.model.StudentModel;
+import com.collegeapp.service.RegisterService;
+import com.collegeapp.util.ImageUtil;
+import com.collegeapp.util.PasswordUtil;
+import com.collegeapp.util.RedirectionUtil;
 
 /**
  * RegisterController handles user registration requests and processes form
@@ -28,38 +28,52 @@ import jakarta.servlet.http.Part;
 public class RegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private final ImageUtil imageUtil = new ImageUtil();
-	private final RegisterService registerService = new RegisterService();
+	private ImageUtil imageUtil;
+	private RegisterService registerService;
+	private RedirectionUtil redirectionUtil;
+
+	@Override
+	public void init() throws ServletException {
+		this.registerService = new RegisterService();
+		this.imageUtil = new ImageUtil();
+		this.redirectionUtil = new RedirectionUtil();
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
+		req.setAttribute("programs", registerService.getPrograms());
+		redirectionUtil.redirectToPage(req, resp, RedirectionUtil.registerUrl);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			StudentModel studentModel = extractStudentModel(req);
+			StudentModel studentModel = extractStudentModel(req, resp);
 			Boolean isAdded = registerService.addStudent(studentModel);
 
 			if (isAdded == null) {
-				handleError(req, resp, "Our server is under maintenance. Please try again later!");
+				redirectionUtil.setMsgAndRedirect(req, resp, "error",
+						"An unexpected error occurred. Please try again later!", RedirectionUtil.registerUrl);
 			} else if (isAdded) {
 				if (uploadImage(req)) {
-					handleSuccess(req, resp, "Your account is successfully created!", "/WEB-INF/pages/login.jsp");
+					redirectionUtil.setMsgAndRedirect(req, resp, "success", "Your account is successfully created!",
+							RedirectionUtil.loginUrl);
 				} else {
-					handleError(req, resp, "Could not upload the image. Please try again later!");
+					redirectionUtil.setMsgAndRedirect(req, resp, "error",
+							"Could not upload the image. Please try again later!", RedirectionUtil.registerUrl);
 				}
 			} else {
-				handleError(req, resp, "Could not register your account. Please try again later!");
+				redirectionUtil.setMsgAndRedirect(req, resp, "error",
+						"Could not register your account. Please try again later!", RedirectionUtil.registerUrl);
 			}
 		} catch (Exception e) {
-			handleError(req, resp, "An unexpected error occurred. Please try again later!");
+			redirectionUtil.setMsgAndRedirect(req, resp, "error",
+					"An unexpected error occurred. Please try again later!", RedirectionUtil.registerUrl);
 			e.printStackTrace(); // Log the exception
 		}
 	}
 
-	private StudentModel extractStudentModel(HttpServletRequest req) throws Exception {
+	private StudentModel extractStudentModel(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
 		String username = req.getParameter("username");
@@ -67,13 +81,14 @@ public class RegisterController extends HttpServlet {
 		String gender = req.getParameter("gender");
 		String email = req.getParameter("email");
 		String number = req.getParameter("phoneNumber");
-		String subject = req.getParameter("subject");
+		int programId = Integer.parseInt(req.getParameter("subject"));
 
 		String password = req.getParameter("password");
 		String retypePassword = req.getParameter("retypePassword");
 
 		if (password == null || !password.equals(retypePassword)) {
-			throw new Exception("Passwords do not match or are invalid.");
+			redirectionUtil.setMsgAndRedirect(req, resp, "error", "Please correct your password & retype-password!",
+					RedirectionUtil.registerUrl);
 		}
 
 		password = PasswordUtil.encrypt(username, password);
@@ -81,9 +96,7 @@ public class RegisterController extends HttpServlet {
 		Part image = req.getPart("image");
 		String imageUrl = imageUtil.getImageNameFromPart(image);
 
-		ProgramModel programModel = new ProgramModel(subject);
-		return new StudentModel(firstName, lastName, username, dob,
-				gender, email, number, password, programModel,
+		return new StudentModel(firstName, lastName, username, dob, gender, email, number, password, programId,
 				imageUrl);
 	}
 
@@ -92,15 +105,4 @@ public class RegisterController extends HttpServlet {
 		return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "student");
 	}
 
-	private void handleSuccess(HttpServletRequest req, HttpServletResponse resp, String message, String redirectPage)
-			throws ServletException, IOException {
-		req.setAttribute("success", message);
-		req.getRequestDispatcher(redirectPage).forward(req, resp);
-	}
-
-	private void handleError(HttpServletRequest req, HttpServletResponse resp, String message)
-			throws ServletException, IOException {
-		req.setAttribute("error", message);
-		req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
-	}
 }

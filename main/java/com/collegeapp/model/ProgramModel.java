@@ -1,6 +1,7 @@
-package com.islington.model;
+package com.collegeapp.model;
 
 public class ProgramModel {
+	private int id;
 	private String name;
 	private String type;
 	private String category;
@@ -8,15 +9,24 @@ public class ProgramModel {
 	public ProgramModel() {
 	}
 
-	public ProgramModel(String name, String type, String category) {
+	public ProgramModel(String name) {
+		this.name = name;
+	}
+
+	public ProgramModel(int id, String name, String type, String category) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.category = category;
 	}
-	
-	public ProgramModel(String name) {
-		this.name = name;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
