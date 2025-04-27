@@ -15,12 +15,13 @@ body {
 
 .login-box {
 	width: 400px;
-	height: 300px;
 	background-color: #fff;
 	border-radius: 10px;
 	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-	margin: 50px auto;
 	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 h2 {
@@ -30,12 +31,13 @@ h2 {
 
 .row {
 	display: flex;
+	justify-content: center; /* Center content horizontally */
+	width: 100%; /* Ensure rows take full width */
 	margin-bottom: 10px;
 }
 
 .col {
-	flex: 1;
-	margin-right: 20px;
+	width: 100%;
 }
 
 label {
@@ -51,10 +53,6 @@ input, select {
 	box-sizing: border-box;
 }
 
-select {
-	appearance: none;
-}
-
 button {
 	background-color: #4CAF50;
 	color: white;
@@ -62,20 +60,34 @@ button {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+	width: 100%;
 }
 
 button:hover {
 	background-color: #449A44;
 }
 
-.error-message {
-	color: red;
+.forgot-button, .register-button {
+	display: block;
+	width: 100%;
 	text-align: center;
-	font-weight: bold;
+	padding: 10px;
+	border-radius: 5px;
+	text-decoration: none;
+	margin-top: 5px;
 }
 
-.success-message {
-	color: seagreen;
-	text-align: center;
-	font-weight: bold;
+.forgot-button {
+	color: #4CAF50;
+	background-color: transparent;
+	border: 1px solid #4CAF50;
+}
+
+.register-button {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.register-button:hover {
+	background-color: #449A44;
 }

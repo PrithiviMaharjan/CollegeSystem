@@ -56,27 +56,24 @@ select {
 	appearance: none;
 }
 
-button {
+.buttons-row {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 20px;
+}
+
+.submit-button, .login-button {
 	background-color: #4CAF50;
 	color: white;
 	padding: 10px 20px;
 	border: none;
 	border-radius: 5px;
+	text-decoration: none;
+	text-align: center;
 	cursor: pointer;
+	width: 48%;
 }
 
-button:hover {
+.submit-button:hover, .login-button:hover {
 	background-color: #449A44;
-}
-
-.error-message {
-	color: red;
-	text-align: center;
-	font-weight: bold;
-}
-
-.success-message {
-	color: seagreen;
-	text-align: center;
-	font-weight: bold;
 }

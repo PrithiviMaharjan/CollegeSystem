@@ -1,4 +1,4 @@
-package com.islington.util;
+package com.collegeapp.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,8 +94,8 @@ public class ImageUtil {
 			return false; // Upload failed
 		}
 	}
-	
+
 	public String getSavePath(String saveFolder) {
-		return "C:/Users/Prithivi/eclipse-workspace/islington-student/src/main/webapp/resources/images/"+saveFolder+"/";
+		return "C:/Users/Prithivi/eclipse-workspace/CollegeApp/src/main/webapp/resources/images/" + saveFolder + "/";
 	}
 }
